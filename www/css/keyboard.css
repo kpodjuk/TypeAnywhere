@@ -2,10 +2,24 @@
 
 * {
   box-sizing: border-box;
-  transition: all 0.3s ease-out;
+  transition: all 0.03s ease-out;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+#statusDot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: green;  /* Initial color (change based on script) */
+  opacity: 0.6;
+  top: 0;
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  left: 0;
+  margin: 20px;
 }
 
 html,
@@ -123,10 +137,10 @@ body {
   text-shadow: -1px -1px 2px rgba(240, 240, 240, 0.4),
       1px 1px 0px rgba(0, 0, 0, 0.15);
 
-    &:hover {
+    /* &:hover {
       box-shadow: 5px 5px 6px rgba(10, 10, 10, 0.4),
         -5px -5px 6px rgba(255, 255, 255, 0.5);
-    }
+    } */
     &:active {
       box-shadow: -1px -1px 6px rgba(10, 10, 10, 0.1),
         1px 1px 6px rgba(255, 255, 255, 0.1);
