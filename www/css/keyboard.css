@@ -1,88 +1,159 @@
-:root {
-    --green: #A2CCB6;
-    --yellow: #FCEEB5;
-    --peach: #EE786E;
-    --off-white: #FFFFF4;
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code&family=Mynerve&family=Pacifico&family=Source+Sans+Pro&display=swap");
+
+* {
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
-    background-color: #FFFFFF;
-    margin-top: 50px;
-    font-family: Arial;
+  background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
 }
 
-span {
-    display: block;
-    margin-top: -5px;
-}
+#codepen {
+  display: grid;
+  grid-template-rows: 30cqh 60cqh;
+  align-items: center;
+  justify-content: center;
+  font-family: "Source Sans Pro", sans-serif;
+  width: 90%;
+  height: 100%;
 
-.keyboard {
-    width: 780px;
-    height: 262px;
-    margin: 0px auto;
-    border: 3px solid #000000;
-    border-radius: 10px;
-    background: #000000;
-}
-
-.row {
-    margin-top: 2px;
-    overflow: hidden;
-}
-
-.key {
-    width: 50px;
-    height: 50px;
-    float: left;
-    cursor: pointer;
-    background-color: var(--off-white);
-    color: #000000;
-    line-height: 48px;
+  #about {
     text-align: center;
-    margin-left: 2px;
-    border-radius: 4px;
+    line-height: 1.2;
+  }
+
+  #keyboard {
+    display: grid;
+    grid-template-rows: repeat(5, 5fr);
+    grid-template-columns: repeat(16, 16fr);
+    border-radius: 10px;
+    border: 2px solid rgba(230, 230, 230, 0.3);
+    padding: 1%;
+    box-shadow: -4px -4px 18px rgba(255, 255, 255, 0.8),
+      4px 4px 22px rgba(0, 0, 0, 0.3),
+      0px 0px 18px rgba(150, 150, 150, 0.15) inset;
+
+    .key {
+      grid-row: span 1;
+      grid-column: span 1;
+    }
+
+    .key-sm,
+    .key-md,
+    .key-lg,
+    .key-xlg {
+      grid-row: span 1;
+    }
+
+    .key-sm {
+      grid-column: span 2;
+    }
+
+    .key-md {
+      grid-column: span 3;
+    }
+
+    .key-lg {
+      grid-column: span 4;
+    }
+
+    .key-xlg {
+      grid-column: span 6;
+    }
+
+    #arrows {
+      width: 100%;
+      grid-column: span 3;
+      display: grid;
+      grid-template-rows: repeat(2, 2fr);
+      grid-template-columns: repeat(3, 3fr);
+
+      .left,
+      .down,
+      .right {
+        grid-row: 2;
+      }
+
+      .left {
+        grid-column: 1;
+      }
+
+      .down {
+        grid-column: 2;
+      }
+
+      .right {
+        grid-column: 3;
+      }
+
+      .up {
+        grid-column: 2;
+        grid-row: 1;
+      }
+    }
+  }
+
+  button {
+    font-family: "Source Sans Pro", sans-serif;
+    backdrop-filter: blur(30px);
+    border: 0;
+    margin: 5px;
+    border-radius: 10px;
+    background: #fad0c4;
+    box-shadow: 5px 5px 6px #dab5ab, -4px -4px 6px rgba(255, 255, 255, 0.4);
+    color: transparent;
+    font-size: 1.8ch;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-shadow: -1px -1px 2px rgba(240, 240, 240, 0.4),
+      1px 1px 0px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      box-shadow: 5px 5px 6px rgba(10, 10, 10, 0.4),
+        -5px -5px 6px rgba(255, 255, 255, 0.5);
+    }
+
+    &:active {
+      box-shadow: -1px -1px 6px rgba(10, 10, 10, 0.1),
+        1px 1px 6px rgba(255, 255, 255, 0.1);
+    }
+  }
 }
 
-.key__symbols {
-    line-height: 28px;
+h6 {
+  font-family: "Fira Code", monospace;
+
+  a {
+    text-decoration: none;
+    font-size: 2.5ch;
+    color: #111;
+    opacity: 0.5;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 
-.key__delete {
-    width: 100px;
-}
-
-.key__oneandhalf {
-    width: 75px;
-}
-
-.key__esc {
-    background: var(--peach);
-}
-
-.key__enter {
-    width: 112px;
-}
-
-.key__caps {
-    width: 90px;
-}
-
-.key__shift-left {
-    width: 100px;
-}
-
-.key__spacebar {
-    width: 300px;
-}
-
-.key__bottom-funct {
-    width: 70px;
-}
-
-.key__arrow {
-    background: var(--green);
-}
-
-.feather {
-    margin-top: 10px;
+kbd {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 2px;
+  padding: 3px;
+  color: #fff;
 }
