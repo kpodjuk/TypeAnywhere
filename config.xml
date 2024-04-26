@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="1.0.0"
     xmlns="http://www.w3.org/ns/widgets"
-    xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    xmlns:cdv="http://cordova.apache.org/ns/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <name>TypeAnywhere</name>
 
     <description>Sample Apache Cordova App</description>
@@ -17,6 +18,13 @@
     <!-- <preference name="LoadingDialog" value="Dialog text" /> -->
     <preference name="Orientation" value="landscape" />
 
+    <preference name="Scheme" value="http" />
+
+    <platform name="android">
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
+    </platform>
 
     <!-- <plugin name="cordova-plugin-device" spec="^1.1.0" /> -->
     <!-- <plugin name="cordova-plugin-device" spec="https://github.com/apache/cordova-plugin-device.git#1.0.0" /> -->
