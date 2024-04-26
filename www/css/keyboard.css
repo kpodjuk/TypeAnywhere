@@ -8,20 +8,6 @@
   text-rendering: optimizeLegibility;
 }
 
-#statusDot {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: green;  /* Initial color (change based on script) */
-  opacity: 0.6;
-  top: 0;
-  position: absolute;
-  z-index: 1;
-  pointer-events: none;
-  left: 0;
-  margin: 20px;
-}
-
 html,
 body {
   height: 100%;
@@ -169,4 +155,19 @@ kbd {
   border-radius: 2px;
   padding: 3px;
   color: #fff;
+}
+
+
+#statusDot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: orange;  /* Initial color (change based on script) */
+  opacity: 0.6;
+  top: 0;
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  left: 0;
+  margin: 20px;
 }

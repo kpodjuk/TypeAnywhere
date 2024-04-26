@@ -1,16 +1,24 @@
-feather.replace();
+let wsConnectionAddress = "ws://" + "key.local" + ":81/";
+let wsConnectionName = ["arduino"];
 
 var connectionCheckInterval = window.setInterval(function () {
   checkConnection();
-}, 2000);
+}, 1000);
 
-var connection = new WebSocket("ws://" + "key.local" + ":81/", ["arduino"]);
+var connection = new WebSocket(wsConnectionAddress, wsConnectionName);
+
+// add event listeners to all keys
+document.querySelectorAll(".key").forEach((key) => {
+  key.addEventListener("click", () => {
+    sendKeyPress(key.innerHTML);
+  });
+});
 
 connection.onopen = function () {
-  let answerJson = {
-    connected: true,
-  };
-  sendJSON(answerJson);
+  // let answerJson = {
+  //   connected: true,
+  // };
+  // sendJSON(answerJson);
 };
 connection.onerror = function (error) {
   console.log("WebSocket Error ", error);
@@ -32,6 +40,11 @@ function sendJSON(message) {
   connection.send(messageString);
 }
 
+function processWebsocketMessage(message) {
+  console.log("Got ws msg!");
+  console.log(message);
+}
+
 function checkConnection() {
   // 0	CONNECTING	Socket has been created. The connection is not yet open.
   // 1	OPEN	The connection is open and ready to communicate.
@@ -39,25 +52,30 @@ function checkConnection() {
   // 3	CLOSED	The connection is closed or couldn't be opened.
   switch (connection.readyState) {
     case 0:
-      document.getElementById("connectionStatus").innerHTML =
-        "Websocket: <b style='color: gray'>Connecting...</b>";
-      document.getElementById("settings").style.display = "none";
+      document.getElementById("statusDot").style.backgroundColor = "orange";
+
       break;
     case 1:
-      document.getElementById("connectionStatus").innerHTML =
-        "Websocket: <b style='color: green'>Connected</b>";
-      document.getElementById("settings").style.display = "block";
-      // requestStatusReport(); // request report to fill UI with current data
+      document.getElementById("statusDot").style.backgroundColor = "green";
+
       break;
     case 2:
-      document.getElementById("connectionStatus").innerHTML =
-        "Websocket: <b style='color: gray'>Closing...</b>";
-      document.getElementById("settings").style.display = "none";
+      document.getElementById("statusDot").style.backgroundColor = "red";
+
       break;
     case 3:
-      document.getElementById("connectionStatus").innerHTML =
-        "Websocket: <b style='color: gray'>Disconnected</b>";
-      document.getElementById("settings").style.display = "none";
+      document.getElementById("statusDot").style.backgroundColor = "red";
+      setTimeout(function () {
+        // Try to reconnect
+        connection = new WebSocket(wsConnectionAddress, wsConnectionName);
+      }, 5000);
       break;
   }
+}
+
+function sendKeyPress(key) {
+  let answerJson = {
+    keyPressed: key,
+  };
+  sendJSON(answerJson);
 }
