@@ -19,7 +19,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  /* width: 99vw; */
+  margin: 0px;
 }
 
 #codepen {
