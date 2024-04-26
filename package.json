@@ -24,6 +24,7 @@
     ]
   },
   "dependencies": {
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "reconnecting-websocket": "^4.4.0"
   }
 }

@@ -1,16 +1,6 @@
 let wsConnectionAddress = "ws://" + "key.local" + ":81/";
-let wsConnectionName = ["arduino"];
-
-// var connectionCheckInterval = window.setInterval(function () {
-//   checkConnection();
-// }, 1000);
-var connection;
-var reconnectInterval;
-connect();
-function connect() {
-  connection = new WebSocket(wsConnectionAddress, wsConnectionName, 2000);
-  updateStatusDot();
-}
+let reconnectTimeout = 3000; // Initial reconnect timeout in milliseconds
+let ws;
 
 // add event listeners to all keys
 document
@@ -22,12 +12,47 @@ document
     });
   });
 
+function connect() {
+  ws = new WebSocket(wsConnectionAddress);
+
+  ws.onopen = () => {
+    console.log("WebSocket connection established!");
+    reconnectTimeout = 3000; // Reset timeout on successful connection
+  };
+
+  ws.onmessage = (event) => {
+    // Handle incoming messages from the server
+    console.log("Received message:", event.data);
+  };
+
+  ws.onclose = (event) => {
+    console.log(
+      "WebSocket connection closed. Reason:",
+      event.reason,
+      event.code
+    );
+    console.log("Reconnecting in", reconnectTimeout, "milliseconds...");
+    setTimeout(connect, reconnectTimeout);
+    reconnectTimeout *= 2; // Double the timeout for each retry (exponential backoff)
+  };
+
+  ws.onerror = (error) => {
+    console.error("WebSocket error:", error);
+    console.log("Reconnecting in", reconnectTimeout, "milliseconds...");
+    setTimeout(connect, reconnectTimeout);
+    reconnectTimeout *= 2; // Double the timeout for each retry (exponential backoff)
+  };
+}
+
+connect();
+
+// ------- helper functions
 function sendJSON(message) {
   // input : message object
   messageString = JSON.stringify(message);
   console.log("sendJSON():");
   console.log(messageString);
-  connection.send(messageString);
+  ws.send(messageString);
 }
 
 function processWebsocketMessage(message) {
@@ -35,12 +60,13 @@ function processWebsocketMessage(message) {
   console.log(message);
 }
 
+setInterval(updateStatusDot, 300);
 function updateStatusDot() {
   // 0	CONNECTING	Socket has been created. The connection is not yet open.
   // 1	OPEN	The connection is open and ready to communicate.
   // 2	CLOSING	The connection is in the process of closing.
   // 3	CLOSED	The connection is closed or couldn't be opened.
-  switch (connection.readyState) {
+  switch (ws.readyState) {
     case 0:
       document.getElementById("statusDot").style.backgroundColor = "orange";
 
