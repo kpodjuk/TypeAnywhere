@@ -1,6 +1,6 @@
-let wsConnectionAddress = "ws://" + "key.local" + ":81/";
-let reconnectTimeout = 3000; // Initial reconnect timeout in milliseconds
-let ws;
+const wsConnectionAddress = "ws://" + "key.local" + ":81/";
+var reconnectTimeout = 3000; // Initial reconnect timeout in milliseconds
+var ws;
 
 // add event listeners to all keys
 document
@@ -50,8 +50,8 @@ connect();
 function sendJSON(message) {
   // input : message object
   messageString = JSON.stringify(message);
-  console.log("sendJSON():");
-  console.log(messageString);
+  // console.log("sendJSON():");
+  // console.log(messageString);
   ws.send(messageString);
 }
 
