@@ -109,18 +109,18 @@ body {
   }
   button {
     font-family: "Source Sans Pro", sans-serif;
-  backdrop-filter: blur(30px);
-  border: 0;
-  margin: 5px;
-  border-radius: 10px;
-  background: #fad0c4;
-  box-shadow: 5px 5px 6px #dab5ab, -4px -4px 6px rgba(255, 255, 255, 0.4);
-  color: transparent;
-  font-size: 1.8ch;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
-  text-shadow: -1px -1px 2px rgba(240, 240, 240, 0.4),
+    backdrop-filter: blur(30px);
+    border: 0;
+    margin: 5px;
+    border-radius: 10px;
+    background: #515151;
+    box-shadow: 5px 5px 6px #dab5ab, -4px -4px 6px rgba(255, 255, 255, 0.4);
+    color: transparent;
+    font-size: 1.8ch;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-shadow: -1px -1px 2px rgba(240, 240, 240, 0.4),
       1px 1px 0px rgba(0, 0, 0, 0.15);
 
     /* &:hover {
